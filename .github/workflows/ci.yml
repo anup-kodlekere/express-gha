@@ -44,9 +44,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install --ignore-scripts --only=dev --loglevel=verbose
-          strace -fvttTyy -s 256 -o /tmp/strace.txt -p $!
-
+          strace -fvttTyy -s 256 -o /tmp/strace.txt npm install --ignore-scripts --only=dev --loglevel=verbose
+          
       - name: Print strace
         run: cat /tmp/strace.txt
 
