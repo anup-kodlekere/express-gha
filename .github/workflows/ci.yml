@@ -48,7 +48,9 @@ jobs:
 
       - name: Print npm logs
         run: |
-          cat "$HOME/.npm/_logs/*"
+          ls "$HOME/.npm/_logs/"
+          cd "$HOME/.npm/_logs/"
+          cat *
           
       - name: Print strace
         run: cat /tmp/strace.txt
