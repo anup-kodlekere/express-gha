@@ -45,6 +45,10 @@ jobs:
       - name: Install dependencies
         run: |
           strace -fvttTyy -s 256 -o /tmp/strace.txt npm install --ignore-scripts --only=dev --loglevel=verbose
+
+      - name: Print npm logs
+        run: |
+          cat "$HOME/.npm/_logs/*"
           
       - name: Print strace
         run: cat /tmp/strace.txt
