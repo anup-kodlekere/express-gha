@@ -26,9 +26,9 @@ jobs:
           - os: ubuntu-22.04
             architecture: x64
             runner-owner: "github-hosted"
-          - os: ubuntu-22.04-x64
-            architecture: x64
-            runner-owner: "actions-runner-x64"
+          # - os: ubuntu-22.04-x64
+          #   architecture: x64
+          #   runner-owner: "actions-runner-x64"
           - os: ubuntu-22.04-ppc64le
             architecture: ppc64le
             runner-owner: "actions-runner-ppc64le"
@@ -43,7 +43,12 @@ jobs:
           architecture: ${{ matrix.architecture }}
 
       - name: Install dependencies
-        run: npm install --ignore-scripts --only=dev
+        run: |
+          npm install --ignore-scripts --only=dev --loglevel=verbose
+          strace -fvttTyy -s 256 -o /tmp/strace.txt -p $!
+
+      - name: Print strace
+        run: cat /tmp/strace.txt
 
       - name: Run lint
         run: npm run lint
